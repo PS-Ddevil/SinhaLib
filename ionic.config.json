@@ -1,0 +1,7 @@
+{
+  "name": "SinhaLib",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
