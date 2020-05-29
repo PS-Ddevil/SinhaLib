@@ -1,0 +1,135 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      Add Book
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="createBookForm" (submit)="createBook()">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Book Name</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-input
+          formControlName="bookName"
+          type="text"
+          placeholder="What's this Book called?"
+        >
+        </ion-input>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Author Name</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-input
+          formControlName="authorName"
+          type="text"
+          placeholder="Who wrote this book?"
+        >
+        </ion-input>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Genre</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-input
+          formControlName="genre"
+          type="text"
+          placeholder="What's the book's genre?"
+        >
+        </ion-input>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+      <ion-label stacked>Number of Pages</ion-label>
+      </ion-card-header>
+      <ion-card-content>
+      <ion-input
+        formControlName="no_pg"
+        type="number"
+        placeholder="No. of Pages?"
+      >
+      </ion-input>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+      <ion-label stacked>Book Description</ion-label>
+      </ion-card-header>
+      <ion-card-content>
+      <ion-textarea
+        formControlName="bookDescription"
+        type="text"
+        placeholder="What's this book about?"
+      >
+      </ion-textarea>
+      </ion-card-content>
+    </ion-card>
+
+  <ion-card class="fileupload" *ngIf="!isUploading && !isUploaded">
+    <ion-card-header>
+      <ion-card-subtitle>Select Coverpage</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="fileUpload btn btn-primary">
+        <input
+          id="uploadBtn"
+          type="file"
+          class="upload"
+          (change)="uploadFile($event.target.files)"
+        />
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card style="display: none;">
+    <ion-input
+      [(ngModel)]="uploadtext"
+      formControlName="uploadstatus"
+      type="text"
+    >
+    </ion-input>
+  </ion-card>
+  
+  <ion-card class="fileupload" *ngIf="isUploaded">
+    <ion-card-content>
+      File:
+      <ion-chip color="success" *ngIf="isUploaded">
+        <ion-label>Uploaded</ion-label>
+      </ion-chip>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="fileupload" *ngIf="isUploading && !isUploaded">
+    <ion-card-header>
+      <ion-card-title>Selected File: <p id="filename">{{ fileName }}</p></ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div>
+        Progress: {{ percentage | number }}%
+        <ion-progress-bar value="{{ percentage / 100 }}"></ion-progress-bar>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button id="submitbtn"expand="block" type="submit" [disabled]="!createBookForm.valid">
+    Add Book
+  </ion-button>
+</form>
+</ion-content>

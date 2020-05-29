@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title class="ion-text-right">
+      <ion-icon name="book-outline"></ion-icon>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar showCancelButton="focus" (ionChange)="filterList($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let book of bookList" routerLink="/detail/{{book.id}}">
+      <ion-label>
+        <h4>{{book.genre}}</h4>
+        <h2>{{book.name}}</h2>
+        <h6>{{book.author}}</h6>
+        <p>{{book.summary}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
